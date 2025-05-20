@@ -1,0 +1,37 @@
+{
+  "name": "engineto2",
+  "version": "1.0.8",
+  "description": "engineto2 is a lightweight, object-oriented canvas manipulation library for TypeScript/JavaScript. It provides an intuitive API for drawing shapes, handling events, and managing canvas interactions.",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c && tsc && cpx \"src/workers/**/*\" dist/workers"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GarcesSebastian/radial-js"
+  },
+  "keywords": [
+    "canvas",
+    "typescript",
+    "shapes",
+    "interactive",
+    "library"
+  ],
+  "author": "Sebxstt",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^4.41.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.8.3"
+  }
+}

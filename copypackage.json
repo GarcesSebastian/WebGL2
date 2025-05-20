@@ -1,0 +1,24 @@
+{
+    "name": "@sebxstt/webgl2",
+    "version": "1.0.1",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "types": "dist/index.d.ts",
+    "files": [
+      "dist"
+    ],
+    "publishConfig": { "access": "public" },
+    "type": "module",
+    "scripts": {
+      "build": "rollup -c"
+    },
+    "devDependencies": {
+      "rollup": "^4.41.0",
+      "rollup-plugin-typescript2": "^0.36.0",
+      "rollup-plugin-web-worker-loader": "^1.7.0",
+      "typescript": "^5.8.3",
+      "webpack": "^5.99.8",
+      "webpack-cli": "^6.0.1"
+    }
+  }
+  
