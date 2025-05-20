@@ -1,6 +1,6 @@
 import { EventsFunctions } from "../Functions/events.functions";
 import { Render2D } from "../Renders/Render2D";
-import { EventsMap } from "../types/Arguments";
+import { EventsMap } from "../Types/Arguments";
 
 class EventsController extends EventsFunctions {
     public static instance: EventsController;

@@ -1,4 +1,4 @@
-import { ElementShape, Rect2D } from "../types/Shapes";
+import { ElementShape, Rect2D } from "../Types/Shapes";
 import { Shape2D } from "../Common/Shape2D";
 
 class CacheManager {

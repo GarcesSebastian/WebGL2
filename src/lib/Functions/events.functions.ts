@@ -1,8 +1,8 @@
 import { Render2D } from "../Renders/Render2D";
-import { ShapeClickEvent } from "../types/Arguments";
+import { ShapeClickEvent } from "../Types/Arguments";
 import { Shape2D } from "../Common/Shape2D";
-import { Vector2D } from "../types/Global";
-import { WorkerMessage } from "../types/Worker";
+import { Vector2D } from "../Types/Global";
+import { WorkerMessage } from "../Types/Worker";
 import { CacheManager } from "../Utils/CacheManager";
 
 class EventsFunctions {

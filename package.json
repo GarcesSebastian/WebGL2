@@ -1,7 +1,7 @@
 {
-  "name": "webgl2",
+  "name": "canvex",
   "version": "1.0.0",
-  "description": "webgl2",
+  "descripcion": "canvex es una biblioteca ligera y flexible que simplifica el trabajo con Canvas 2D y WebGL2, ideal para juegos, simulaciones físicas, lienzos interactivos y más.",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -14,7 +14,8 @@
     "build:ts": "tsc",
     "build:rollup": "rollup -c",
     "build:copy-workers": "cpx \"src/workers/*.js\" dist/lib/workers",
-    "build": "npm run clean && npm run build:ts && npm run build:rollup && npm run build:copy-workers"
+    "build": "npm run clean && npm run build:ts && npm run build:rollup && npm run build:copy-workers",
+    "post": "npm version patch --no-git-tag-version && npm publish"
   },
   "repository": {
     "type": "git",
@@ -22,11 +23,17 @@
   },
   "keywords": [
     "canvas",
+    "webgl2",
+    "2d",
+    "3d",
+    "graphics",
+    "game",
+    "physics",
+    "drawing",
     "typescript",
-    "shapes",
+    "rendering",
     "interactive",
-    "library",
-    "web-workers"
+    "canvasx"
   ],
   "author": "Sebxstt",
   "license": "MIT",

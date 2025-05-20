@@ -1,10 +1,10 @@
-import { Quality } from "../types/Global"
+import { Quality } from "../Types/Global"
 import { Shape2D } from "../Common/Shape2D"
 import { EventsController } from "../Controllers/events.controller";
 import { WebGL2 } from "../WebGL2"
 import { Render2DHelper } from "../Helpers/render2d.helper";
-import { WorkerMessage } from "../types/Worker";
-import { ElementShape } from "../types/Shapes";
+import { WorkerMessage } from "../Types/Worker";
+import { ElementShape } from "../Types/Shapes";
 import { CacheManager } from "../Utils/CacheManager";
 
 class Render2D {

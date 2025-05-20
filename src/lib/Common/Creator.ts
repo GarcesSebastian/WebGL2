@@ -1,7 +1,7 @@
 import { Rect2D } from "../Shapes/Rect2D"
 import { Text2D } from "../Shapes/Text2D"
-import { Rect2D as Rect2DProps } from "../types/Shapes";
-import { Text2D as Text2DProps } from "../types/Shapes";
+import { Rect2D as Rect2DProps } from "../Types/Shapes";
+import { Text2D as Text2DProps } from "../Types/Shapes";
 import { FPS } from "../Controllers/fps.controller";
 import { Render2D } from "../Renders/Render2D";
 import { Transformer } from "../Utils/Transformer";

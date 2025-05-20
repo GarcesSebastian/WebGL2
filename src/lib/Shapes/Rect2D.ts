@@ -1,5 +1,5 @@
 import { Shape2D } from "../Common/Shape2D"
-import { Rect2D as Rect2DProps } from "../types/Shapes";
+import { Rect2D as Rect2DProps } from "../Types/Shapes";
 
 class Rect2D extends Shape2D {
     constructor(DataRect: Rect2DProps){

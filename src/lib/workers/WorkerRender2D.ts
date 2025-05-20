@@ -1,6 +1,6 @@
-import { Shape2D } from "../types/Shapes";
-import { Vector2D } from "../types/Global";
-import { WorkerMessage } from "../types/Worker"
+import { Shape2D } from "../Types/Shapes";
+import { Vector2D } from "../Types/Global";
+import { WorkerMessage } from "../Types/Worker"
 
 interface Element extends Shape2D {
     id: string;

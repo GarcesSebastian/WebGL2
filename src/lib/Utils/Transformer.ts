@@ -1,4 +1,4 @@
-import { Vector2D } from "../types/Global";
+import { Vector2D } from "../Types/Global";
 import { Shape2D } from "../Common/Shape2D";
 import { Render2D } from "../Renders/Render2D";
 import { Rect2D } from "../Shapes/Rect2D";

@@ -1,4 +1,4 @@
-import { Quality } from "./types/Global";
+import { Quality } from "./Types/Global";
 import { Creator } from "./Common/Creator";
 import { Render2D } from "./Renders/Render2D";
 import { RenderGL } from "./Renders/RenderGL";

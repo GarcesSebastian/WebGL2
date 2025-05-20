@@ -1,8 +1,8 @@
 import { WebGL2 } from "../WebGL2"
 import { Render2D } from "../Renders/Render2D";
-import { Vector2D, Dimension, Quality } from "../types/Global";
-import { Rect2D, Shape2D as Shape2DProps } from "../types/Shapes";
-import { EventsMap } from "../types/Arguments";
+import { Vector2D, Dimension, Quality } from "../Types/Global";
+import { Rect2D, Shape2D as Shape2DProps } from "../Types/Shapes";
+import { EventsMap } from "../Types/Arguments";
 import { CacheManager } from "../Utils/CacheManager";
 
 abstract class Shape2D {

@@ -1,5 +1,5 @@
-import { FontFamily, FontSize, FontStyle, FontVariant, FontWeight, TextAlign, TextBaseline, TextDirection } from "../types/Global"
-import { Text2D as Text2DProps } from "../types/Shapes"
+import { FontFamily, FontSize, FontStyle, FontVariant, FontWeight, TextAlign, TextBaseline, TextDirection } from "../Types/Global"
+import { Text2D as Text2DProps } from "../Types/Shapes"
 import { Shape2D } from "../Common/Shape2D"
 import { Text2D as Text2DUtils } from "../Utils/Text2D"
 
