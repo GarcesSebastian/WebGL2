@@ -1,6 +1,6 @@
 {
   "name": "canvex",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "descripcion": "canvex es una biblioteca ligera y flexible que simplifica el trabajo con Canvas 2D y WebGL2, ideal para juegos, simulaciones físicas, lienzos interactivos y más.",
   "type": "module",
   "main": "dist/index.cjs.js",
