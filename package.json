@@ -1,7 +1,7 @@
 {
-  "name": "engineto2",
-  "version": "1.0.8",
-  "description": "engineto2 is a lightweight, object-oriented canvas manipulation library for TypeScript/JavaScript. It provides an intuitive API for drawing shapes, handling events, and managing canvas interactions.",
+  "name": "webgl2",
+  "version": "1.0.0",
+  "description": "webgl2",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -10,10 +10,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c && tsc && cpx \"src/workers/**/*\" dist/workers"
-  },
-  "publishConfig": {
-    "access": "public"
+    "clean": "rimraf dist",
+    "build:ts": "tsc",
+    "build:rollup": "rollup -c",
+    "build:copy-workers": "cpx \"src/workers/*.js\" dist/lib/workers",
+    "build": "npm run clean && npm run build:ts && npm run build:rollup && npm run build:copy-workers"
   },
   "repository": {
     "type": "git",
@@ -24,14 +25,22 @@
     "typescript",
     "shapes",
     "interactive",
-    "library"
+    "library",
+    "web-workers"
   ],
   "author": "Sebxstt",
   "license": "MIT",
+  "peerDependencies": {
+    "typescript": ">=4.0"
+  },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.2",
+    "cpx": "^1.5.0",
     "rollup": "^4.41.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-typescript2": "^0.36.0",
+    "rollup-plugin-web-worker-loader": "^1.7.0",
+    "rimraf": "^5.0.0",
     "typescript": "^5.8.3"
   }
 }

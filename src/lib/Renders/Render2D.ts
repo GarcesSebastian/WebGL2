@@ -28,8 +28,8 @@ class Render2D {
         this.EventsController = EventsController.getInstance();
         this.Render2DHelper = Render2DHelper.getInstance();
 
-        this.WorkerRender2D = new Worker(new URL("../workers/WorkerRender2D", import.meta.url), { type: "module" });
-        this.WorkerPhysics2D = new Worker(new URL("../workers/WorkerPhysics2D", import.meta.url), { type: "module" })
+        this.WorkerRender2D = new Worker(new URL("./lib/workers/WorkerRender2D.js", import.meta.url), { type: "module" });
+        this.WorkerPhysics2D = new Worker(new URL("./lib/workers/WorkerPhysics2D.js", import.meta.url), { type: "module" })
 
         this.PhysicsWorker2D = this.PhysicsWorker2D.bind(this);
 

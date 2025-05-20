@@ -10,6 +10,6 @@
       "skipLibCheck": true,
       "sourceMap": true
     },
-    "include": ["src", "src/shims-webworker.d.ts"]
+    "include": ["src"]
   }
   
