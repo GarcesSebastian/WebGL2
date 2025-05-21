@@ -43,6 +43,7 @@ class EventsFunctions {
                 const child = render2D.childrens.get(id);
 
                 if(!child) return;
+                if(child.getNew("transformer")) return;
 
                 click(child, payload.data.x, payload.data.y);
             }

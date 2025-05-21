@@ -44,6 +44,14 @@ class Render2D {
         this.childrens.set(child.getId(), child);
     }
 
+    public removeChild(child: Shape2D): void {
+        this.childrens.delete(child.getId());
+    }
+
+    public removeShape(id: string): void {
+        this.childrens.delete(id);
+    }
+
     public getGravity(): number {
         return this.gravity;
     }
@@ -77,6 +85,7 @@ class Render2D {
             for(const node of updated){
                 const inst = this.getChildrens().get(node.id)
                 if(!inst) continue;
+                if(!inst.physics) continue;
 
                 inst.set("position", node.position!);
                 inst.set("velocity", node.velocity!);

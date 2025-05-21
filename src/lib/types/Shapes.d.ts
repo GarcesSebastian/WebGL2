@@ -27,6 +27,8 @@ interface Dimensions {
 }
 
 interface States {
+    ignorable?: boolean;
+    visible?: boolean;
     collisionable?: boolean;
     draggable?: boolean;
     physics?: boolean;

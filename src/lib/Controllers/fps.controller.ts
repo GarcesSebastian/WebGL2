@@ -1,8 +1,10 @@
 import { Render2D } from "../Renders/Render2D";
+import { Text2D as Text2DProps } from "../Types/Shapes";
 import { Text2D } from "../Shapes/Text2D";
+import { WebGL2 } from "../WebGL2";
 
 class FPS {
-    public render2D: Render2D;
+    public Render2D: Render2D;
 
     public logs: boolean = false;
 
@@ -13,12 +15,12 @@ class FPS {
     protected lastTime: number = 0;
 
     constructor(Render2D: Render2D){
-        this.render2D = Render2D;
+        this.Render2D = Render2D;
     }
 
     private getTextLog(): string {
         const fpsText = `FPS: ${this.fps}`
-        const objectsText = `Objects: ${this.render2D.childrens.size}`
+        const objectsText = `Objects: ${this.Render2D.childrens.size}`
 
         const textLog = `${fpsText}\n${objectsText}`
 
@@ -40,7 +42,7 @@ class FPS {
 
         if(!this.logs) return;
 
-        this.fpsInstance = new Text2D({
+        const payloadText2D = {
             text: this.getTextLog(),
             position: { x: 20, y: 20 },
             rotation: 0,
@@ -70,7 +72,10 @@ class FPS {
             textBaseline: "top",
             textDirection: "ltr",
             layer: 100000,
-        })
+        }
+
+        const newText2D = WebGL2.getInstance().createText2D(payloadText2D as Text2DProps) as Text2D
+        this.fpsInstance = newText2D
     }
 
     protected updateFPS(now: number): void {

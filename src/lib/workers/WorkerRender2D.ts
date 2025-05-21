@@ -33,6 +33,7 @@ class WorkerRender2D {
 
     public static checkCollision(nodes: Element[], x: number, y: number, callback: (node: Element) => void): void {
         let stopped = false;
+        console.log(nodes)
         
         nodes.forEach((node: Element) => {
             if(stopped) return;
@@ -63,7 +64,7 @@ onmessage = function(e) {
     if(payload.type == "dragstart") {
         const nodes = payload.data.nodes;
 
-        WorkerRender2D.checkCollision(nodes, payload.data.x, payload.data.y, (node: Element) => {
+        WorkerRender2D.checkCollision(nodes.filter((node: Element) => !node.ignorable), payload.data.x, payload.data.y, (node: Element) => {
             postMessage({
                 type: "dragstart",
                 data: {

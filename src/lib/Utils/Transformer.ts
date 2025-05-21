@@ -20,7 +20,7 @@ class Transformer {
 
     public childrens: Map<string, Shape2D> = new Map();
 
-    private nodes: Rect2D[] = [];
+    private nodes: Map<string, Rect2D> = new Map();
     private center: Rect2D | null = null;
 
     private position: Vector2D = { x: 0, y: 0 };
@@ -33,15 +33,33 @@ class Transformer {
 
     constructor(){
         this.WebGL2 = WebGL2.getInstance();
-        this.Render2D = this.WebGL2.render2D;
+        this.Render2D = this.WebGL2.Render2D;
         this.ctx = this.Render2D.ctx;
+
+        this.createCenter();
+        this.createNodes();
 
         this.update();
     }
 
     public add(node: Shape2D): void {
+        if(node.physics) return;
+
+        node.set("ignorable", true);
         this.childrens.set(node.getId(), node);
         this.update();
+
+        this.show();
+    }
+
+    public show(): void {
+        this.nodes.forEach((node) => node.set("visible", true));
+        this.center?.set("visible", true);
+    }
+
+    public hide(): void {
+        this.nodes.forEach((node) => node.set("visible", false));
+        this.center?.set("visible", false);
     }
 
     public resize(): void {
@@ -65,53 +83,115 @@ class Transformer {
         this.position = { x: minX, y: minY }
         this.width = maxX - minX;
         this.height = maxY - minY;
+
+        this.updateCenter();
+        this.updateNodes();
     }
 
-    private update(): void {
-        if(this.childrens.size === 0) return;
+    private events(): void {
+        if(!this.center) return;
 
-        if(this.center){
-            this.center.destroy();
-        }
-
-        this.nodes.forEach(node => {
-            node.destroy();
+        this.center.on("dragmove", (e) => {
+            const { x, y } = e;
+            this.move({ x, y });
         })
+    }
 
-        this.resize();
+    private getPositionNormalized(): Vector2D {
+        return { x: this.position.x - this.padding, y: this.position.y - this.padding }
+    }
 
-        const xCenter = this.position.x - this.padding;
-        const yCenter = this.position.y - this.padding;
+    private getWidthNormalized(): number {
+        return this.width + this.padding * 2;
+    }
 
-        const widthCenter = this.width + this.padding * 2;
-        const heightCenter = this.height + this.padding * 2;
+    private getHeightNormalized(): number {
+        return this.height + this.padding * 2;
+    }
+
+    private createCenter(): void {
+        if(this.center) return;
 
         this.center = this.WebGL2.createRect2D({
-            position: { x: xCenter, y: yCenter },
-            width: widthCenter,
-            height: heightCenter,
+            position: this.getPositionNormalized(),
+            width: this.getWidthNormalized(),
+            height: this.getHeightNormalized(),
             background: "rgba(255, 0, 0, 0.3)",
             borderColor: "rgba(255, 0, 0, 1)",
             borderSize: 2,
-            collisionable: false
+            collisionable: false,
+            draggable: true,
+            visible: false
         })
 
-        Array.from(["top-left", "top-right", "bottom-left", "bottom-right"] as NodeAttachKey[]).forEach((value) => {
-            const attach = NODES_ATTACHS[value]
+        this.center.new("transformer", true);
 
-            const xNormalized = xCenter - this.nodeSize / 2 + widthCenter * attach.x;
-            const yNormalized = yCenter - this.nodeSize / 2 + heightCenter * attach.y;
+        this.events();
+    }
 
-            this.nodes.push(this.WebGL2.createRect2D({
+    private updateCenter(): void {
+        const position = this.getPositionNormalized();
+        const width = this.getWidthNormalized();
+        const height = this.getHeightNormalized();
+
+        this.center?.set("position", position);
+        this.center?.set("width", width);
+        this.center?.set("height", height);
+    }
+
+    private createNodes(): void {
+        Object.keys(NODES_ATTACHS).forEach((key) => {
+            const attach = NODES_ATTACHS[key as NodeAttachKey];
+
+            const xNormalized = this.getPositionNormalized().x - this.nodeSize / 2 + this.getWidthNormalized() * attach.x;
+            const yNormalized = this.getPositionNormalized().y - this.nodeSize / 2 + this.getHeightNormalized() * attach.y;
+
+            const node = this.WebGL2.createRect2D({
                 position: { x: xNormalized, y: yNormalized },
                 width: this.nodeSize,
                 height: this.nodeSize,
                 background: "rgba(0, 255, 0, 0.3)",
                 borderColor: "rgba(0, 255, 0, 1)",
                 borderSize: 2,
-                collisionable: false
-            }))
+                collisionable: false,
+                draggable: true,
+                visible: false
+            })
+
+            this.nodes.set(key, node)
+            node.new("keyAttach", key)
         })
+    }
+
+    private updateNodes(): void {
+        this.nodes.forEach((node, key) => {
+            const attachData = NODES_ATTACHS[key as NodeAttachKey];
+
+            const position = this.getPositionNormalized();
+            const width = this.getWidthNormalized();
+            const height = this.getHeightNormalized();
+
+            const xNormalized = position.x - this.nodeSize / 2 + width * attachData.x;
+            const yNormalized = position.y - this.nodeSize / 2 + height * attachData.y;
+
+            node.set("position", { x: xNormalized, y: yNormalized });
+        })
+    }
+
+    private move(position: Vector2D): void {
+        this.position = position;
+
+        this.childrens.forEach((child) => {
+            child.set("position", { x: position.x, y: position.y });
+        })
+
+        this.updateCenter();
+        this.updateNodes();
+    }
+
+    private update(): void {
+        if(this.childrens.size === 0) return;
+        this.resize();
     }
 }
 

@@ -70,7 +70,7 @@ class WebGL2 extends Creator {
 
         this.config();
         this.startFPS();
-        this.render2D.start();
+        this.Render2D.start();
     }
 
     public stop(): void {
@@ -108,7 +108,7 @@ class WebGL2 extends Creator {
 
         if(delta >= this.umbralTime){
             this.renderGL.render(now);
-            this.render2D.render(now);
+            this.Render2D.render(now);
             
             this.lastRenderTime = now;
         }

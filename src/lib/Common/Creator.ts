@@ -5,17 +5,26 @@ import { Text2D as Text2DProps } from "../Types/Shapes";
 import { FPS } from "../Controllers/fps.controller";
 import { Render2D } from "../Renders/Render2D";
 import { Transformer } from "../Utils/Transformer";
+import { CacheManager } from "../Utils/CacheManager";
 
 class Creator extends FPS {
     constructor(Render2D: Render2D){
         super(Render2D);
     }
     public createText2D(data: Text2DProps): Text2D {
-        return new Text2D(data);
+        const newText2D = new Text2D(data);
+        this.Render2D.childrens.set(newText2D.getId(), newText2D);
+        CacheManager.addChild(newText2D);
+
+        return newText2D;
     }
 
     public createRect2D(data: Rect2DProps): Rect2D {
-        return new Rect2D(data);
+        const newRect2D = new Rect2D(data);
+        this.Render2D.childrens.set(newRect2D.getId(), newRect2D);
+        CacheManager.addChild(newRect2D);
+        
+        return newRect2D;
     }
 
     public createTransformer2D(): Transformer {

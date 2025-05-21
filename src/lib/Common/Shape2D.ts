@@ -40,6 +40,8 @@ abstract class Shape2D {
     public paddingBottom: number;
     public paddingLeft: number;
     
+    public ignorable: boolean;
+    public visible: boolean;
     public collisionable: boolean;
     public draggable: boolean;
     public physics: boolean;
@@ -77,16 +79,15 @@ abstract class Shape2D {
         this.paddingBottom = DataShape.paddingBottom || 0;
         this.paddingLeft = DataShape.paddingLeft || 0;
 
+        this.ignorable = DataShape.ignorable == undefined ? false : DataShape.ignorable;
+        this.visible = DataShape.visible == undefined ? true : DataShape.visible;
         this.collisionable = DataShape.collisionable == undefined ? true : DataShape.collisionable;
         this.draggable = DataShape.draggable == undefined ? false : DataShape.draggable;
         this.physics = DataShape.physics == undefined ? false : DataShape.physics;
 
         this.WebGL2 = WebGL2.getInstance();
-        this.Render2D = this.WebGL2.render2D;
+        this.Render2D = this.WebGL2.Render2D;
         this.ctx = this.Render2D.ctx;
-
-        this.Render2D.childrens.set(this.id, this);
-        CacheManager.addChild(this);
 
         this.shapePath = new Path2D();
         
@@ -110,6 +111,15 @@ abstract class Shape2D {
 
     public get<K extends keyof this>(key: K): this[K] {
         return this[key];
+    }
+
+    public new(key: string, value: any): void {
+        if(this[key as keyof this]) return;
+        this[key as keyof this] = value;
+    }
+
+    public getNew(key: string): any {
+        return this[key as keyof this];
     }
 
     public getAttributes(): Rect2D {
@@ -136,6 +146,8 @@ abstract class Shape2D {
             paddingBottom: this.get("paddingBottom"),
             paddingLeft: this.get("paddingLeft"),
             layer: this.get("layer"),
+            ignorable: this.get("ignorable"),
+            visible: this.get("visible"),
             collisionable: this.get("collisionable"),
             draggable: this.get("draggable"),
             physics: this.get("physics"),
@@ -173,7 +185,10 @@ abstract class Shape2D {
     }
 
     public destroy(): void {
-        this.Render2D.childrens.delete(this.id)
+        console.log("Destroying shape with id:", this.id);
+        this.Render2D.removeChild(this);
+        CacheManager.removeChild(this.getId());
+        this.visible = false;
     }
 
     public draw(): void {}

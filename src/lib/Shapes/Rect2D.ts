@@ -42,6 +42,8 @@ class Rect2D extends Shape2D {
     public update(): void {}
 
     public draw(): void {
+        if(!this.visible) return;
+
         const ctx = this.ctx;
         this.ensurePath();
 
